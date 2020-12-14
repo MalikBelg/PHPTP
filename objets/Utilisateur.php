@@ -84,8 +84,6 @@ class Utilisateur {
         $contenu = (file_exists("json/utilisateurs.json"))? file_get_contents("json/utilisateurs.json") : "";
         $users = json_decode($contenu);
 
-      
-
         if(isset($_POST["pseudo"]) && isset($_POST["motdepasse"])){
             $_SESSION["user"] = $_POST["pseudo"];
             $_SESSION["mdp"] = $_POST["motdepasse"]; 
