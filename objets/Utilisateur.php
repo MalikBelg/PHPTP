@@ -79,6 +79,31 @@ class Utilisateur {
     }
 
 
+    static function verify_user() {
+
+        $contenu = (file_exists("json/utilisateurs.json"))? file_get_contents("json/utilisateurs.json") : "";
+        $users = json_decode($contenu);
+
+      
+
+        // if(isset($_SESSION["user"])){
+        //     $_SESSION["user"] = $_POST["pseudo"];
+        //     $_SESSION["motdepasse"] = $_POST["motdepasse"]; 
+        // }
+
+        // if(isset($_SESSION["user"])){
+        //     return "index.php?route=moncompte";
+        // } else {
+        //     return "index.php?route=connexion";
+        // }
+       
+       
+        $users = (is_array($users))? $users : [];
+        
+        return $users;
+
+    }
+
 
     
 

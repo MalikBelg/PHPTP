@@ -3,6 +3,9 @@
 
 session_start();
 
+var_dump($_SESSION);
+var_dump($_POST);
+
 
 $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
 
@@ -14,14 +17,23 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
         break;
         case "ajout_user" : ajout_user();
         break;
+        case "moncompte" : ["templates" => "moncompte.php"];
         default : $template = connect_user();
 
     }
 
 
 
-    function connect_user(): array {
-        return ["templates" => "formulaire_connexion.php"];
+    function connect_user(){
+        
+        require_once "objets/Utilisateur.php";
+
+        $users = Utilisateur::verify_user();
+        
+        return ["templates" => "formulaire_connexion.php", "json" => $users];
+
+        header("Location:index.php?route=moncompte");
+        exit;
     }
 
 
@@ -31,13 +43,10 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
         require_once "objets/Utilisateur.php";
 
         $users = Utilisateur::getUsers();
-
-        
         
         return ["templates" => "formulaire_inscription.php", "json" => $users];
 
-        header("Location:index.php?route=connexion");
-        exit;
+
     }
 
 
@@ -46,10 +55,14 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
 
         require_once "objets/Utilisateur.php";
 
-        $user = new Utilisateur(01234556, $_POST["pseudo"], $_POST["mdp"]);
-        // $hashed_mdp = password_hash($mdp, PASSWORD_BCRYPT, [CRYPT_SALT_LENGTH]);
-        $user->save_user();
+        $user = new Utilisateur(rand(100000, 999999), $_POST["pseudo"], $_POST["mdp"]);
+        // $hashed_mdp = password_hash($_POST["mdp"], PASSWORD_BCRYPT, [CRYPT_SALT_LENGTH]);
+        $user->save_user();        
+        
+        header("Location:index.php?route=connexion");
+        exit;
     }
+    
 
 
 
