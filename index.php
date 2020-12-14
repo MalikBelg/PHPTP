@@ -13,31 +13,37 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
 
     switch($route){
 
-        case "connexion" : $template = connect_user();
+        case "connexion" : $template = showFormConnexion();
         break;
-        case "inscription" : $template = insert_user();
+        case "inscription" : $template = showFormInscription();
         break;
-        case "ajout_user" : ajout_user();
+        case "insert_user" : insert_user();
         break;
         case "moncompte" : connect_user();
-        default : $template = connect_user();
+        break;
+        default : $template = showFormConnexion();
 
     }
 
 
 
     function showFormConnexion(){
-        return ["templates" => "formulaire_connexion.php"];
+       
+        require_once "objets/Utilisateur.php";
+
+        $users = Utilisateur::getUsers();
+        
+        return ["templates" => "formulaire_connexion.php", "json" => $users];
+
     }
 
 
-    function connect_user(){
+    function connect_user(): array {
         
         require_once "objets/Utilisateur.php";
 
-        $users = Utilisateur::verify_user();
-        
-        return ["templates" => "formulaire_connexion.php", "json" => $users];
+        $user = new Utilisateur(rand(100000, 999999), $_POST["pseudo"], $_POST["mdp"]);
+        $user->verify_user();
 
         header("Location:index.php?route=moncompte");
         exit;
@@ -45,20 +51,21 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
 
 
 
-    function insert_user(): array {   
-        
+
+
+    function showFormInscription(): array {   
+
         require_once "objets/Utilisateur.php";
 
         $users = Utilisateur::getUsers();
-        
-        return ["templates" => "formulaire_inscription.php", "json" => $users];
 
+        return ["templates" => "formulaire_inscription.php", "json" => $users];
 
     }
 
 
 
-    function ajout_user(){
+    function insert_user(){
 
         require_once "objets/Utilisateur.php";
 
