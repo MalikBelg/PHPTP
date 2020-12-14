@@ -13,6 +13,7 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
         case "inscription" : $template = insert_user();
         break;
         case "ajout_user" : ajout_user();
+        break;
         default : $template = connect_user();
 
     }
@@ -32,6 +33,7 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
         $users = Utilisateur::getUsers();
 
         
+        
         return ["templates" => "formulaire_inscription.php", "json" => $users];
 
         header("Location:index.php?route=connexion");
@@ -44,7 +46,7 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
 
         require_once "objets/Utilisateur.php";
 
-        $user = new Utilisateur($_POST["id_utilisateur"], $_POST["pseudo"], $_POST["mdp"]);
+        $user = new Utilisateur(01234556, $_POST["pseudo"], $_POST["mdp"]);
         $user->save_user();
     }
 
@@ -63,7 +65,7 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
     </head>
     <body>
         
-        <?php require $template ?>
+        <?php require "templates/" . $template["templates"]; ?>
         
         
         

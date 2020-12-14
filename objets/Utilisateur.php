@@ -7,7 +7,7 @@ class Utilisateur {
     protected $mdp;
 
 
-    function __construct(int $id_utilisateur, $pseudo, $mdp){
+    function __construct($id_utilisateur, $pseudo, $mdp){
         $this->id_utilisateur = $id_utilisateur;
         $this->pseudo = $pseudo;
         $this->mdp = $mdp;
@@ -15,11 +15,11 @@ class Utilisateur {
 
 //=================================================//
     
-    function setUser(int $id_utilisateur){
+    function setUser($id_utilisateur){
         $this->id_utilisateur = $id_utilisateur;
     }
 
-    function getUser(): int{
+    function getUser(){
         return $this->id_utilisateur;
     }
 
