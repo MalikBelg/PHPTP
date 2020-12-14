@@ -5,6 +5,8 @@ class Utilisateur {
     protected $id_utilisateur;
     protected $pseudo;
     protected $mdp;
+    
+    
 
 
     function __construct($id_utilisateur, $pseudo, $mdp){
@@ -77,6 +79,8 @@ class Utilisateur {
     }
 
 
+
+    
 
 
 

@@ -5,9 +5,6 @@ $users = $template["json"];
 ?>
 
 
-
-
-
 <h2>Inscrivez-vous</h2>    
 
     <form action="index.php?route=insert_user" method="POST">

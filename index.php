@@ -47,6 +47,7 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
         require_once "objets/Utilisateur.php";
 
         $user = new Utilisateur(01234556, $_POST["pseudo"], $_POST["mdp"]);
+        // $hashed_mdp = password_hash($mdp, PASSWORD_BCRYPT, [CRYPT_SALT_LENGTH]);
         $user->save_user();
     }
 
