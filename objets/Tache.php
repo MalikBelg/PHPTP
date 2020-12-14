@@ -57,6 +57,25 @@ class Tache {
 
     //==================================================//
 
+    function save_tache() {
+
+       
+        $contenu = (file_exists("json/taches.json"))? file_get_contents("json/taches.json") : ""; 
+        
+       
+        $taches = json_decode($contenu);
+        $taches = (is_array($taches))? $taches : [];
+
+        $tache = get_object_vars($this);
+
+        array_push($taches, $tache);
+
+        $handle = fopen("json/taches.json", "w");
+        $json = json_encode($taches);
+
+        fwrite($handle, $json);
+        fclose($handle);
+    }
 
 }
 

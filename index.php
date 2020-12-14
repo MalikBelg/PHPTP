@@ -19,7 +19,11 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
         break;
         case "insert_user" : insert_user();
         break;
-        case "moncompte" : connect_user();
+        case "connect_user" : connect_user();
+        break;
+        case "moncompte" : $template = showMoncompte();
+        break;
+        case "tache" : insert_tache();
         break;
         default : $template = showFormConnexion();
 
@@ -35,6 +39,7 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
         
         return ["templates" => "formulaire_connexion.php", "json" => $users];
 
+
     }
 
 
@@ -44,6 +49,7 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
 
         $user = new Utilisateur(rand(100000, 999999), $_POST["pseudo"], $_POST["mdp"]);
         $user->verify_user();
+ 
 
         header("Location:index.php?route=moncompte");
         exit;
@@ -63,7 +69,7 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
 
     }
 
-
+ 
 
     function insert_user(){
 
@@ -75,6 +81,26 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
         
         header("Location:index.php?route=connexion");
         exit;
+    }
+
+
+
+
+    function showMoncompte(){
+        return ["templates" => "moncompte.php"];
+    }
+
+
+
+
+
+    function insert_tache(){
+
+        require_once "objets/Tache.php";
+
+        $tache = new Tache($_POST["id_tache"], "", $_POST["datelimite"], rand(100000, 999999));
+        $tache->save_tache();
+
     }
     
 
