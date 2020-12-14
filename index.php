@@ -3,9 +3,9 @@
 
 session_start();
 
-var_dump($_SESSION);
-var_dump($_POST);
 
+var_dump($_POST);
+var_dump($_SESSION);
 
 $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
 

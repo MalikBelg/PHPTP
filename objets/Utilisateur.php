@@ -86,16 +86,16 @@ class Utilisateur {
 
       
 
-        // if(isset($_SESSION["user"])){
-        //     $_SESSION["user"] = $_POST["pseudo"];
-        //     $_SESSION["motdepasse"] = $_POST["motdepasse"]; 
-        // }
+        if(isset($_POST["pseudo"]) && isset($_POST["motdepasse"])){
+            $_SESSION["user"] = $_POST["pseudo"];
+            $_SESSION["mdp"] = $_POST["motdepasse"]; 
+        }
 
-        // if(isset($_SESSION["user"])){
-        //     return "index.php?route=moncompte";
-        // } else {
-        //     return "index.php?route=connexion";
-        // }
+        if(isset($_SESSION["user"])){
+            return "moncompte.php";
+        } else {
+            return "formulaire_connexion.php";
+        }
        
        
         $users = (is_array($users))? $users : [];
