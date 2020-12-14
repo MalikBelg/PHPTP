@@ -79,7 +79,7 @@ class Utilisateur {
     }
 
 
-    static function verify_user() {
+    static function verify_user(): array {
 
         $contenu = (file_exists("json/utilisateurs.json"))? file_get_contents("json/utilisateurs.json") : "";
         $users = json_decode($contenu);
@@ -90,9 +90,9 @@ class Utilisateur {
         }
 
         if(isset($_SESSION["user"])){
-            return "moncompte.php";
+            return ["templates" => "moncompte.php"];
         } else {
-            return "formulaire_connexion.php";
+            return ["templates" => "formulaire_connexion.php"];
         }
        
        
