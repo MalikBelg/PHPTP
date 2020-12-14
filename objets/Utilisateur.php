@@ -81,8 +81,8 @@ class Utilisateur {
 
     static function verify_user(): array {
 
-        $contenu = (file_exists("json/utilisateurs.json"))? file_get_contents("json/utilisateurs.json") : "";
-        $users = json_decode($contenu);
+        // $contenu = (file_exists("json/utilisateurs.json"))? file_get_contents("json/utilisateurs.json") : "";
+        // $users = json_decode($contenu);
 
         if(isset($_POST["pseudo"]) && isset($_POST["motdepasse"])){
             $_SESSION["user"] = $_POST["pseudo"];
@@ -96,9 +96,9 @@ class Utilisateur {
         }
        
        
-        $users = (is_array($users))? $users : [];
+        // $users = (is_array($users))? $users : [];
         
-        return $users;
+        // return $users;
 
     }
 

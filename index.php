@@ -7,6 +7,8 @@ session_start();
 var_dump($_POST);
 var_dump($_SESSION);
 
+// session_destroy();
+
 $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
 
     switch($route){
@@ -17,11 +19,16 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
         break;
         case "ajout_user" : ajout_user();
         break;
-        case "moncompte" : ["templates" => "moncompte.php"];
+        case "moncompte" : connect_user();
         default : $template = connect_user();
 
     }
 
+
+
+    function showFormConnexion(){
+        return ["templates" => "formulaire_connexion.php"];
+    }
 
 
     function connect_user(){
