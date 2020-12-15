@@ -72,14 +72,13 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
 
  
 // Fonction qui permet de s'inscrire via un formulaire, redirige vers la page de connexion
+// Password_hash permet de crypter le mot de passe
     function insert_user(){
 
         require_once "objets/Utilisateur.php";
 
 
-        $user = new Utilisateur(rand(100000, 999999), $_POST["pseudo"], $_POST["mdp"]); 
-
-        // $hashed_mdp = password_hash($_POST["mdp"], PASSWORD_BCRYPT, [CRYPT_SALT_LENGTH]);
+        $user = new Utilisateur(rand(100000, 999999), $_POST["pseudo"], password_hash($_POST["mdp"], PASSWORD_BCRYPT)); 
     
         $user->save_user();        
 
