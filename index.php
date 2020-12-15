@@ -10,6 +10,7 @@ var_dump($_SESSION);
 
 $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
 
+// Routeur
     switch($route){
 
         case "connexion" : $template = showFormConnexion();
@@ -29,7 +30,7 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
     }
 
 
-
+// Fonction qui affiche le template formulaire de connexion
     function showFormConnexion(){
        
         require_once "objets/Utilisateur.php";
@@ -41,12 +42,13 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
 
     }
 
-
+// Fonction qui permet de se connecter à la page "mon compte" via un formulaire
     function connect_user(): array {
         
         require_once "objets/Utilisateur.php";
+        
 
-        $user = new Utilisateur(rand(100000, 999999), $_POST["pseudo"], $_POST["mdp"]);
+        $user = new Utilisateur(rand(100000, 999999), $_POST["pseudo"], $_POST["mdp"]); 
         $user->verify_user();
  
 
@@ -57,7 +59,7 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
 
 
 
-
+// Fonction qui affiche le template formulaire d'inscription
     function showFormInscription(): array {   
 
         require_once "objets/Utilisateur.php";
@@ -69,22 +71,25 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
     }
 
  
-
+// Fonction qui permet de s'inscrire via un formulaire, redirige vers la page de connexion
     function insert_user(){
 
         require_once "objets/Utilisateur.php";
 
-        $user = new Utilisateur(rand(100000, 999999), $_POST["pseudo"], $_POST["mdp"]);
+
+        $user = new Utilisateur(rand(100000, 999999), $_POST["pseudo"], $_POST["mdp"]); 
+
         // $hashed_mdp = password_hash($_POST["mdp"], PASSWORD_BCRYPT, [CRYPT_SALT_LENGTH]);
+    
         $user->save_user();        
-        
+
         header("Location:index.php?route=connexion");
         exit;
     }
 
 
 
-
+// Fonction qui affiche le template mon compte
     function showMoncompte(){
 
         require_once "objets/Tache.php";
@@ -97,7 +102,7 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
 
 
 
-
+// Fonction qui permet de créer une nouvelle tâche
     function insert_tache(){
 
         require_once "objets/Tache.php";
@@ -125,7 +130,8 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
     </head>
     <body>
         
-        <?php require "templates/" . $template["templates"]; ?>
+        <!-- Require pour afficher mes templates -->
+        <?php require "templates/" . $template["templates"]; ?>     
         
         
         

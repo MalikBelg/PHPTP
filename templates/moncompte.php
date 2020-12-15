@@ -22,8 +22,9 @@ $taches = $template["json"];
 
     <h3>Listes de tâches :</h3>
 
+    <!-- Boucle foreach pour afficher chacune des tâches entrées dans le formulaire -->
         <ul>
-            <?php foreach ($taches as $tache):?>
+            <?php foreach ($taches as $tache):?> 
                 <li><strong> Nom tâche : </strong> <?= $tache->id_tache ?> <strong>Date limite:</strong> <?= $tache->datelimite ?></li>
             <?php endforeach ?>
         </ul>
