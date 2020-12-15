@@ -4,7 +4,6 @@
 session_start();
 
 
-var_dump($_POST);
 var_dump($_SESSION);
 
 // session_destroy();
@@ -87,7 +86,12 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
 
 
     function showMoncompte(){
-        return ["templates" => "moncompte.php"];
+
+        require_once "objets/Tache.php";
+
+        $taches = Tache::getTaches();
+
+        return ["templates" => "moncompte.php", "json" => $taches];
     }
 
 
@@ -101,6 +105,8 @@ $route = (isset($_GET["route"]))? $_GET["route"] : "connexion";
         $tache = new Tache($_POST["id_tache"], "", $_POST["datelimite"], rand(100000, 999999));
         $tache->save_tache();
 
+        header("Location:index.php?route=moncompte");
+        exit;
     }
     
 

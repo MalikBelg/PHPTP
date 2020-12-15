@@ -8,7 +8,7 @@ class Tache {
     protected $id_utilisateur;
 
 
-    function __construct(string $id_tache, string $description, int $datelimite, int $id_utilisateur){
+    function __construct($id_tache, $description, $datelimite, $id_utilisateur){
         $this->id_tache = $id_tache;
         $this->description = $description;
         $this->datelimite = $datelimite;
@@ -56,6 +56,22 @@ class Tache {
     }
 
     //==================================================//
+
+    static function getTaches(): array {
+
+        // Je vais chercher le contenu de mon fichier .json, puis on le décode
+        $contenu = (file_exists("json/taches.json"))? file_get_contents("json/taches.json") : "";
+        $taches = json_decode($contenu);
+
+        // Je transforme ces données en tableau
+        $taches = (is_array($taches))? $taches : [];
+
+        // Je renvoi ce tableau
+        return $taches;
+     }
+
+
+
 
     function save_tache() {
 

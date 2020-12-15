@@ -70,11 +70,14 @@ class Utilisateur {
 
     static function getUsers(): array {
 
+        // Je vais chercher le contenu de mon fichier .json, puis on le décode
         $contenu = (file_exists("json/utilisateurs.json"))? file_get_contents("json/utilisateurs.json") : "";
         $users = json_decode($contenu);
 
+        // Je transforme ces données en tableau
         $users = (is_array($users))? $users : [];
 
+        // Je renvoi ce tableau
         return $users;
     }
 
